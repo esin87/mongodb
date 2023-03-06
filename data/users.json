@@ -3,22 +3,26 @@
 		"firstName": "Terry",
 		"lastName": "Medhurst",
 		"phone": 5125550555,
-		"dob": "2000-12-25"
+		"dob": "2000-12-25",
+		"state": "Texas"
 	},
 	{
 		"name": "Rob Gonzales",
 		"phone": "512-111-1111",
-		"dob": "1958-04-04"
+		"dob": "1958-04-04",
+		"state": "TX"
 	},
 	{
 		"firstName": "Alison",
 		"lastName": "Zhao",
 		"phoneNumber": 1234567890,
-		"dob": "1989-12-21"
+		"dob": "1989-12-21",
+		"state": "Minnesota"
 	},
 	{
 		"firstName": "Claire",
 		"lastName": "Perry",
-		"phoneNumber": 1234567890
+		"phoneNumber": 1234567890,
+		"state": "Minnesota"
 	}
 ]
