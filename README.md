@@ -211,6 +211,8 @@ the [users2.json](data/users2.json) file. This data is courtesy of the Dummy
 JSON website. This data has many more fields and is also more consistently
 structured than the previous data we were working with.
 
+> Note also that documents can have fields with nested arrays and objects.
+
 When we read all our data, notice that the field for the query filter is empty,
 `{}`. In order to query for more specific data, we need to pass in a filter
 condition.
@@ -252,6 +254,15 @@ multiple matches in a certain field.
 { address.state: { $in: [ "CA", "AZ" ] }}
 ```
 
+We can also use
+[Regular Expressions in our queries](https://www.mongodb.com/docs/manual/reference/operator/query/regex/#mongodb-query-op.-regex).
+For example, in order to find the users with "executive" in their job title
+(case-insensitive match):
+
+```c
+{ company.title: { $regex: 'executive', $options: 'i' } }
+```
+
 #### You Try
 
 - Find all the users taller than 5'5"
@@ -260,22 +271,78 @@ multiple matches in a certain field.
 
 ### Logical Operators
 
-We can also use AND or OR operator logic in our MongoDB query syntax.
+We can also use AND or OR operator logic in our MongoDB query syntax. Let's find
+all the users who live in Tennessee with brown hair.
 
--
+```c
+{ $and: [ { address.state: "TN" }, { hair.color: "Brown" } ] }
+```
 
-### Sorting
+What about users who have green eyes or O- blood type?
+
+```c
+{ $or: [ { eyeColor: "Green"}, { bloodGroup: "O-"} ] }
+```
+
+To change that to users with both, we'd just need to change the query operator
+to `$and`.
+
+#### You Try
+
+- asdf
+- asdf
+- asdf
 
 ### Projection
 
 We can select which fields we want to return from our queries using the
-"PROJECT" option in the query field.
+"PROJECT" option in the query field. Thinking back to our query that looked for
+users in California and Arizona, what if we wanted to return just their first
+name, last name, and address?
+
+```c
+// Filter
+{ address.state: { $in: [ "CA", "AZ" ] }}
+// Project
+{ firstName: 1, lastName: 1, address: 1 }
+```
+
+We can specify the fields we want to return by naming them and providing a 1. We
+can also withhold certain fields by naming them and providing a 0. The only
+option for combining the syntax for returning and suppressing fields is if we
+want to return certain fields but suppress the Mongo ObjectId.
+
+```c
+{ firstName: 1, lastName: 1, address: 1, _id: 0 }
+```
 
 **💡 What SQL feature does this correspond to?**
 
+You might be wondering if we can alias or create new fields that we return in
+our Mongo queries, like we can in SQL. Say we wanted to return the data above,
+but create just a "name" field from our documents. We can project a "name" field
+and use the `$concat` operator to assemble the data.
+
+```c
+{ name: { $concat: ["$firstName", " ", "$lastName"] }, address: 1 }
+```
+
+#### You Try
+
+- Return the users in California or Arizona, project an "address" field that is
+  a string with street address, city, state, and zip code
+- Return all users older than 40 with a description string that contains their
+  eye color and hair type and color; for example, "description: "Amber-eyed with
+  Straight Black hair""
+
 ### Clean Up
 
-When we are done with a database, we can drop the database as well.
+This cluster will continue to be free, but we can delete collections and
+databases if needed to free up space. Look for the "trashcan" icon next to the
+collection or database name on the left side menu to delete your collections or
+databases.
+
+You can also query for and delete individual documents.
 
 ## Next Steps
 
