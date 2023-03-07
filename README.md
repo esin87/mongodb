@@ -190,6 +190,12 @@ programmatic way to define schema for our application data.
 **💡 What is the relationship between a database server, a database, a
 collection, and a document in MongoDB?**
 
+<details><summary>One visualization</summary>
+
+![Database server, databases, collections and documents](assets/db-server-collection-documents.png)
+
+</details>
+
 ## CRUD with Documents, Collections, and Databases
 
 We have created a database server, a database, a collection, and multiple
@@ -233,13 +239,14 @@ Let's look for all the users with green eyes.
 To make our queries more sophisticated, we can use Mongo's query operators to do
 more than just check for equality in our filter.
 
-We can compare. Let's find all the users who are 47 years and older.
+We can compare values. Let's find all the users who are 47 years and older.
 
 ```c
 { age: { $gte: 47 } }
 ```
 
-What about all the users who live in California or Arizona?
+What about all the users who live in California or Arizona? We can check for
+multiple matches in a certain field.
 
 ```c
 { address.state: { $in: [ "CA", "AZ" ] }}
@@ -248,10 +255,14 @@ What about all the users who live in California or Arizona?
 #### You Try
 
 - Find all the users taller than 5'5"
-- Find all the users who don't live in Kentucky
 - Find all the users with A+ or A- blood types
+- Find all the users who don't live in Kentucky
 
 ### Logical Operators
+
+We can also use AND or OR operator logic in our MongoDB query syntax.
+
+-
 
 ### Sorting
 
@@ -289,6 +300,13 @@ you can try:
   [tutorials](https://www.mongodb.com/docs/manual/tutorial/)
 - Build a
   [MERN application](https://www.mongodb.com/languages/mern-stack-tutorial)
+- Learn about
+  [data modeling](https://www.mongodb.com/docs/manual/core/data-modeling-introduction/)
+  in MongoDB
+- Interact with MongoDB
+  [from a Python application](https://realpython.com/introduction-to-mongodb-and-python/#using-mongodb-with-python-and-pymongo)
+- [MongoDB Tutorial](https://www.w3resource.com/mongodb/introduction-mongodb.php)
+  on W3 Schools
 
 ## References
 
