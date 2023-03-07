@@ -25,14 +25,20 @@ you're in the right place to learn more about MongoDB.
 
 ## Why MongoDB
 
+Though SQL databases are the older and still a very popular database format,
+NoSQL databases have grown in popularity in recent years. NoSQL databases like
+MongoDB have many use cases in both
+[application development](https://www.mongodb.com/use-cases) and
+[data engineering](https://dashbird.io/blog/nosql-database-data-engineering/).
+
 MongoDB is a non-relational, document-based database. It stores data in a format
 called binary JSON, or BSON. Because BSON is so close to JSON in form and
 function, MongoDB lends itself very well for the database layer of fully
 JavaScript stacks.
 
 Non-relational, or NoSQL, databases are different in many ways from the SQL
-databases we've worked with in training. For starters, we are not always
-guaranteed the ACID principles with NoSQL databases, though MongoDB
+databases we've worked with in training. They aroseFor starters, we are not
+always guaranteed the ACID principles with NoSQL databases, though MongoDB
 [can be set up to enforce ACID for multi-document transactions](https://www.mongodb.com/basics/acid-transactions).
 
 With MongoDB, there is no inherent consistency in our data structure, which SQL
@@ -78,7 +84,7 @@ provisioning the server, installing the database, taking backups, etc.
 Let's start by [navigating to MongoDB's website](https://www.mongodb.com) and
 signing up or signing in.
 
-> I usually prefer using OAuth to log into most sites, so that I don't have to
+> I prefer using OAuth to log into most websites, so that I don't have to
 > remember (and forget) another set of credentials.
 
 Once we've created our account or used our Google or GitHub credentials to log
@@ -107,9 +113,9 @@ with other MongoDB customers.
 
 In that corner of the server, which we'll call our cluster, we can create
 MongoDB databases! It takes a few minutes to "provision" the cluster, because a
-lot is happening in that time. The physical infrastructure is being set up, such
-as the hardware and network settings to run the cluster, as well as the software
-needed to create it.
+lot is happening in that time. The hardware and network settings to run the
+cluster, as well as the software needed to create it, are all being configured
+and set up.
 
 This takes us to the Security Quickstart page. For now, let's set up
 authentication with a username and password. You can give your default user any
@@ -194,9 +200,98 @@ What if we want to query for particular data? We can use MongoDB's powerful
 [query syntax](https://www.mongodb.com/docs/manual/tutorial/query-documents/) in
 order to do so.
 
-Let's drop our current users collection and create a new one using the
-[users2.json](data/users2.json) file. This data is courtesy of the Dummy JSON
-website. This data has many more fields and is also more consistently structured
-than the previous data we were working with.
+Let's delete the data in our current users collection and create new data using
+the [users2.json](data/users2.json) file. This data is courtesy of the Dummy
+JSON website. This data has many more fields and is also more consistently
+structured than the previous data we were working with.
+
+When we read all our data, notice that the field for the query filter is empty,
+`{}`. In order to query for more specific data, we need to pass in a filter
+condition.
+
+### Specify Equality Condition
+
+To specify equality conditions, use `<field>: <value>` in the query filter.
+
+Let's look for all the users with green eyes.
+
+```c
+{ eyeColor: "Green" }
+```
+
+**💡 What SQL statement would this correspond to?**
+
+#### You Try
+
+- Find all the users who are 39 years old (1 user)
+- Find all the users with B+ blood (2 users)
+- Find all the female users (13 users)
+- Find all the users with brown hair (7 users)
+
+### Specify Conditions Using Query Operators
+
+To make our queries more sophisticated, we can use Mongo's query operators to do
+more than just check for equality in our filter.
+
+We can compare. Let's find all the users who are 47 years and older.
+
+```c
+{ age: { $gte: 47 } }
+```
+
+What about all the users who live in California or Arizona?
+
+```c
+{ address.state: { $in: [ "CA", "AZ" ] }}
+```
+
+#### You Try
+
+- Find all the users taller than 5'5"
+- Find all the users who don't live in Kentucky
+- Find all the users with A+ or A- blood types
+
+### Logical Operators
+
+### Sorting
+
+### Projection
+
+We can select which fields we want to return from our queries using the
+"PROJECT" option in the query field.
+
+**💡 What SQL feature does this correspond to?**
+
+### Clean Up
 
 When we are done with a database, we can drop the database as well.
+
+## Next Steps
+
+We explored some of MongoDB's most essential capabilities. It is easy to use and
+highly flexible as you saw, and supports a very rich, intuitive query syntax.
+MongoDB can do a lot more -- for instance, you can
+[index your data](https://www.mongodb.com/docs/manual/indexes/) to make it
+faster to search on certain fields.
+
+MongoDB also has a powerful
+[aggregation pipeline](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/)
+that makes it easy to filter, aggregate, and transform documents in stepwise
+fashion.
+
+There are also great tools for visualizing and interacting with your data, like
+MongoDB Compass and command line tools.
+
+If this is a topic you're interested in pursuing, here are some of the things
+you can try:
+
+- Check out MongoDB's wonderful
+  [tutorials](https://www.mongodb.com/docs/manual/tutorial/)
+- Build a
+  [MERN application](https://www.mongodb.com/languages/mern-stack-tutorial)
+
+## References
+
+- MongoDB
+  [Query Documents](https://www.mongodb.com/docs/manual/tutorial/query-documents/)
+- [Query Operators](https://www.mongodb.com/docs/manual/reference/operator/query/#std-label-query-selectors)
