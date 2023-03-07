@@ -289,9 +289,9 @@ to `$and`.
 
 #### You Try
 
-- asdf
-- asdf
-- asdf
+- Find users with straight hair in Vermont
+- Find users with "Associate" in their job title or who live in Kentucky
+- Find users with gray eyes who are "Engineers"
 
 ### Projection
 
@@ -334,6 +334,25 @@ and use the `$concat` operator to assemble the data.
 - Return all users older than 40 with a description string that contains their
   eye color and hair type and color; for example, "description: "Amber-eyed with
   Straight Black hair""
+
+### Sorting
+
+We can use the "Sort" field under the extended search options to easily query by
+a parameter. We enter -1 for descending and 1 for ascending order. To find the
+oldest user, we would sort by descending order of age:
+
+```c
+{ age: -1 }
+```
+
+Entering multiple search terms allows you to sort the sorted data by another
+query.
+
+#### You Try
+
+- Find the youngest user
+- Find the tallest user
+- Find the user with the longest last name
 
 ### Clean Up
 
